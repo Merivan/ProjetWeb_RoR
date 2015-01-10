@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Blog de Merivan" %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag 'navbar' %>
+
+    <%= javascript_include_tag "application" %>
+  </head>
+  <body>
+
+    <div id='navbar'>
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Blog de Merivan</a>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+          <ul class="nav navbar-nav">
+              <li><%= link_to "Accueil", "/"  %></li>
+          </ul>
+          <p class="navbar-text pull-right">
+            <% if user_signed_in? %>
+              Logged in as <strong><%= current_user.email %></strong>.
+              <%= link_to 'Modifier le profil', edit_user_registration_path, :class => 'btn-default' %> |
+              <%= link_to "Deconnection", destroy_user_session_path, method: :delete, :class => 'btn-default' %>
+            <% else %>
+              <%= link_to "inscription", new_user_registration_path, :class => 'btn-default' %> |
+              <%= link_to "Connection", new_user_session_path, :class => 'btn-default'  %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+        <div class="col-lg-2">
+          <div class="well sidebar-nav">
+            <h3>Blog de Merivan</h3>
+            <a class="brand" href="/"><img src="assets/merivan.png"></a>
+            <ul class="nav nav-list">
+              <li class="nav-header"></li>
+              Ce blog a été crée pour le cours de programmation WEB avec Ruby on Rails et Bootstrap.
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <footer>
+        <p>&copy; Merivan 2015</p>
+      </footer>
+
+    </div> <!-- /container -->
+  </body>
+</html>
